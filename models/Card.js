@@ -13,9 +13,9 @@ export default class Card {
   //********Methods********
   constructor(product, handleDelete, handleUpdate) {
     this.code = product.getCode;
-    this.name = product.getName;
-    this.quantity = product.getQuantity;
-    this.cost = product.getCost;
+    this.name = product.name;
+    this.quantity = product.quantity;
+    this.cost = product.cost;
     this.deleteBtn.addEventListener('click', () => handleDelete(this.code));
     this.updateBtn.addEventListener('click', () => handleUpdate(this.code));
   }

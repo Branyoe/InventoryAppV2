@@ -2,6 +2,8 @@ import Alert from "./models/Alert.js";
 import Card from "./models/Card.js";
 import CardsManager from "./models/CardsManager.js";
 import Form from "./models/Form.js";
+import History from "./models/History.js";
+import HistoryItem from "./models/HistoryItem.js";
 import Inventory from "./models/Inventory.js";
 import Product from "./models/Product.js";
 import ToastController from "./models/ToastController.js";
@@ -20,6 +22,8 @@ const form = new Form(
     codeHelper: Utils.selector('codeHelper')
   }
 );
+const historyContainer = Utils.selector('historyContainer');
+const history = new History(historyContainer);
 const inventory = new Inventory();
 const saveBtn = Utils.selector('btn-submit');
 const searchBtn = Utils.selector('btn-search');
@@ -86,9 +90,10 @@ function deleteProduct(code) {
     action: 'Deleted Product',
     ...inventory.search(code).getValue
   })
-  toastComponent.show();
-  cardsManager.deleteCard(code);
   inventory.delete(code);
+  cardsManager.deleteCard(code);
+  // toastComponent.show();
+  history.add(new HistoryItem("DELETE", code));
 }
 
 function updateProduct(code) {
@@ -105,7 +110,8 @@ function saveBtnHandleUpdate() {
     action: 'Updated Product',
     ...inventory.search(codeForUpdate).getValue
   })
-  toastComponent.show();
+  // toastComponent.show();
+  history.add(new HistoryItem("UPDATE", codeForUpdate));
   setSaveBtnMode(false);
   updateFlag = false;
 }
@@ -116,20 +122,21 @@ function saveBtnHandleAdd() {
     return;
   }
   form.showCodeHelper(false);
-  const newProducto = new Product(form.getValue);
-  inventory.add(newProducto);
+  const newProduct = new Product(form.getValue);
+  inventory.add(newProduct);
 
   const card = new Card(
-    newProducto,
+    newProduct,
     code => deleteProduct(code),
     code => updateProduct(code)
   )
   cardsManager.add(card);
   toastComponent.set({
     action: 'Added Product',
-    ...newProducto.getValue
+    ...newProduct.getValue
   })
-  toastComponent.show();
+  // toastComponent.show();
+  history.add(new HistoryItem("ADD", newProduct.getCode));
 }
 
 function setSaveBtnMode(isUpdate) {

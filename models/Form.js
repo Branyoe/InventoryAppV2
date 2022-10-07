@@ -52,8 +52,8 @@ export default class Form{
   //setters
   setValue(product){
     this.#codeInp.value = product.getCode;
-    this.#nameInp.value = product.getName;
-    this.#quantityInp.value = product.getQuantity;
-    this.#costInp.value = product.getCost;
+    this.#nameInp.value = product.name;
+    this.#quantityInp.value = product.quantity;
+    this.#costInp.value = product.cost;
   }
 }

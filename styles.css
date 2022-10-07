@@ -2,6 +2,51 @@
   background-color: rgb(29, 29, 252);
 }
 
+.left-col{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.history-container{
+  height: 180px;
+  padding-right: 5px;
+  overflow: scroll;
+} 
+
+.history-container::-webkit-scrollbar{
+  background-color: transparent;
+  width: .7rem;
+}
+
+.history-container::-webkit-scrollbar-thumb{
+  background: #e9ecef;
+  border-radius: 30px;
+}
+.history{
+  /* outline: solid black 1px; */
+  height: 200px;
+}
+
+
+
+#cardsContainer{
+  padding-right: 5px;
+  overflow: scroll;
+  height: 70vh;
+}
+
+
+#cardsContainer::-webkit-scrollbar{
+  background-color: transparent;
+  width: .7rem;
+}
+
+#cardsContainer::-webkit-scrollbar-thumb{
+  background: #e9ecef;
+  border-radius: 30px;
+}
+
 .navbar{
   display: flex;
   justify-content: space-between;
