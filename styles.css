@@ -1,0 +1,56 @@
+.bg-blue{
+  background-color: rgb(29, 29, 252);
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-inline{
+  display: flex;
+}
+
+.card{
+  width: 100%;
+}
+
+.buttonsContainer{
+  display: flex;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.normal{
+  font-weight: normal;
+}
+
+.toast{
+  position: fixed;
+  transform: translate(20px, 75vh);
+}
+
+.filterContainer{
+  display: block;
+  display: flex;
+  justify-content: end;
+}
+
+.filterItm{
+  border-radius: 5px;
+  outline: solid 1px #ced4da;
+}
+
+.filterItm:hover{
+  outline: solid 2px #ced4da;
+}
+
+.filterItmSelected{
+  background: #ced4da;
+}
+
+.toast-body{
+  background-color:  #e9ecef;
+}
