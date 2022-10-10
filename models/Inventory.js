@@ -5,11 +5,18 @@ export default class Inventory {
   #products = null;
 
   //********Methods********
+  /**
+   * @method constructor
+   * @return {Inventory} a Inventory instance
+   */
   constructor() {
     this.#products = [];
   }
 
-  
+  /**
+   * @method add
+   * @param {Product} product 
+   */
   add(product) {
     let indexForInsert;
     if (!this.#products.length) {
@@ -20,11 +27,21 @@ export default class Inventory {
     }
   }
 
+  /**
+   * @method update
+   * @param {number} code - Product code
+   * @param {{name?, quantity?, cost?}} newValue - Data for update
+   */
   update(code, newValue) {
     const foundProduct = this.search(code);
     foundProduct?.update(newValue);
   }
 
+  /**
+   * @method search
+   * @param {number} code - Product code
+   * @returns {Product} Found Product
+   */
   search(code) {
     // let foundProduct, i = 0;
     // do {
@@ -34,11 +51,19 @@ export default class Inventory {
     // return foundProduct;
 
     if(this.#products.length == 0) return;
-    let foundIndex = this.#binarySearchForAProduct(code);
+    let foundIndex = this.#productBinarySearch(code);
     return this.#products[foundIndex];
   }
 
+  /**
+   * @method delete
+   * @param {number} code - Product code
+   * @return {Product} Deleted Product
+   */
   delete(code) {
+    const foundProduct = this.search(code);
+    if(!foundProduct) return;
+
     let i = 0, deleted = false;
     do {
       if (this.#products[i].getCode === code) {
@@ -47,8 +72,16 @@ export default class Inventory {
       }
       i++;
     } while (!deleted && i < this.#products.length);
+
+    return foundProduct;
   }
 
+
+  /**
+   * @method insert
+   * @param {Product} product - Product to incert
+   * @param {number} index - Position to insert
+   */
   insert(product, index) {
     this.#products.length += 1;
     for (let i = this.#products.length - 1; i >= index; i--) {
@@ -57,20 +90,32 @@ export default class Inventory {
     this.#products[index] = product;
   }
 
-  #binarySearchForAProduct( wantedCode, start = 0, end = this.#products.length - 1) {
+  /**
+   * @method productBinarySearch
+   * @param {number} wantedCode - Product code
+   * @param {number} start - Initial position of search range
+   * @param {number} end - End position of search range 
+   * @returns {number} Product position found
+   */
+  #productBinarySearch( wantedCode, start = 0, end = this.#products.length - 1) {
     if (wantedCode > this.#products[end].getCode || wantedCode < this.#products[start].getCode) return;
     if (start > end) return;
     let middle = Math.floor((start + end) / 2);
     if (wantedCode === this.#products[middle].getCode) {
       return middle;
     } else if (wantedCode > this.#products[middle].getCode) {
-      return this.#binarySearchForAProduct(wantedCode, middle + 1, end);
+      return this.#productBinarySearch(wantedCode, middle + 1, end);
     } else {
-      return this.#binarySearchForAProduct(wantedCode, start, middle - 1);
+      return this.#productBinarySearch(wantedCode, start, middle - 1);
     }
   }
 
-  #productsListToString(productsList = []) {
+  /**
+   * @method productListToString
+   * @param {Array} productsList - List of products
+   * @returns {string} return a {}
+   */
+  #productListToString(productsList = []) {
     if (this.#products.length === 0) return '[]'
     let stringList = '[';
     for (let i = 0; i < productsList.length - 1; i++) {
@@ -83,7 +128,7 @@ export default class Inventory {
   get getLastProduct() { return this.#products[this.#products.length - 1] }
 
   get getList() {
-    return this.#productsListToString(this.#products);
+    return this.#productListToString(this.#products);
   };
 
   get getProducts() { return this.#products };
@@ -93,6 +138,6 @@ export default class Inventory {
     for (let i = this.#products.length - 1; i >= 0; i--) {
       invertedList.push(this.#products[i]);
     }
-    return this.#productsListToString(invertedList);
+    return this.#productListToString(invertedList);
   }
 }
