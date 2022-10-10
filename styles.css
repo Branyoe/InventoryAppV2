@@ -9,7 +9,8 @@
 }
 
 .history-container{
-  height: 180px;
+  min-height: auto  ;
+  max-height: 180px;
   padding-right: 5px;
   overflow: scroll;
 } 
@@ -23,17 +24,12 @@
   background: #e9ecef;
   border-radius: 30px;
 }
-.history{
-  /* outline: solid black 1px; */
-  height: 200px;
-}
-
-
 
 #cardsContainer{
   padding-right: 5px;
   overflow: scroll;
-  height: 70vh;
+  min-height: auto;
+  max-height: 70vh;
 }
 
 

@@ -9,6 +9,7 @@ export default class Inventory {
     this.#products = [];
   }
 
+  
   add(product) {
     let indexForInsert;
     if (!this.#products.length) {

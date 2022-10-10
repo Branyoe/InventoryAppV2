@@ -1,3 +1,4 @@
+// import ToastController from "./models/ToastController.js";
 import Alert from "./models/Alert.js";
 import Card from "./models/Card.js";
 import CardsManager from "./models/CardsManager.js";
@@ -6,10 +7,11 @@ import History from "./models/History.js";
 import HistoryItem from "./models/HistoryItem.js";
 import Inventory from "./models/Inventory.js";
 import Product from "./models/Product.js";
-import ToastController from "./models/ToastController.js";
 import Utils from "./Utils.js";
 
 
+// const toast = Utils.selector('liveToast');
+// const toastComponent = new ToastController(toast);
 const alert = new Alert('No existen resultados')
 const cardsContainer = Utils.selector('cardsContainer');
 const cardsManager = new CardsManager(cardsContainer);
@@ -28,8 +30,6 @@ const inventory = new Inventory();
 const saveBtn = Utils.selector('btn-submit');
 const searchBtn = Utils.selector('btn-search');
 const searchInp = Utils.selector('search-inp');
-const toast = Utils.selector('liveToast');
-const toastComponent = new ToastController(toast);
 const sortBtn = Utils.selector('sort-btn')
 
 let codeForUpdate = 0;
@@ -86,14 +86,14 @@ searchInp.addEventListener('input', () => {
 })
 
 function deleteProduct(code) {
-  toastComponent.set({
-    action: 'Deleted Product',
-    ...inventory.search(code).getValue
-  })
   inventory.delete(code);
   cardsManager.deleteCard(code);
-  // toastComponent.show();
   history.add(new HistoryItem("DELETE", code));
+  // toastComponent.set({
+  //   action: 'Deleted Product',
+  //   ...inventory.search(code).getValue
+  // })
+  // toastComponent.show();
 }
 
 function updateProduct(code) {
@@ -106,14 +106,14 @@ function updateProduct(code) {
 function saveBtnHandleUpdate() {
   inventory.update(codeForUpdate, form.getValue);
   cardsManager.update(codeForUpdate, form.getValue);
-  toastComponent.set({
-    action: 'Updated Product',
-    ...inventory.search(codeForUpdate).getValue
-  })
-  // toastComponent.show();
   history.add(new HistoryItem("UPDATE", codeForUpdate));
   setSaveBtnMode(false);
   updateFlag = false;
+  // toastComponent.set({
+  //   action: 'Updated Product',
+  //   ...inventory.search(codeForUpdate).getValue
+  // })
+  // toastComponent.show();
 }
 
 function saveBtnHandleAdd() {
@@ -131,12 +131,12 @@ function saveBtnHandleAdd() {
     code => updateProduct(code)
   )
   cardsManager.add(card);
-  toastComponent.set({
-    action: 'Added Product',
-    ...newProduct.getValue
-  })
-  // toastComponent.show();
   history.add(new HistoryItem("ADD", newProduct.getCode));
+  // toastComponent.set({
+  //   action: 'Added Product',
+  //   ...newProduct.getValue
+  // })
+  // toastComponent.show();
 }
 
 function setSaveBtnMode(isUpdate) {
@@ -155,71 +155,76 @@ function setSaveBtnMode(isUpdate) {
 
 // const inventory = new Inventory();
 
-// const product1 = new Product({
-//   //el codigo es asignado automaticamente por el Inventory para evitar la duplicidad de este.
-//   name: 'p1',
-//   quantity: 1,
-//   cost: 1
-// })
-// const product2 = new Product({
-//   name: 'p2',
-//   quantity: 2,
-//   cost: 2
-// });
-
-// //no product case
-// console.log('no product case\n');
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
-
-// //one product case
-// console.log('one product case\n');
-// inventory.add(product1);
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
-// console.log(inventory.search(1));
-
-// //two products case
-// console.log('two products case\n');
-// inventory.add(product2);
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
-// console.log(inventory.search(1));
-// console.log(inventory.search(2));
-
-// //Update product case
-// console.log('Update product case\n');
-// inventory.update(1, {
-//   name: 'product1',
-//   quantity: 1,
-//   cost: 1
-// });
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
-// console.log(inventory.search(1));
-
-// //delete product case
-// console.log('delete product case\n');
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
-// inventory.delete(1);
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
-// console.log(inventory.search(1)); //now is non-existent
-// console.log(inventory.search(2));
-
-// //delete non-existent product case
-// console.log('delete non-existent product case\n');
-// inventory.delete(1);
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
-
-// //Update non-existent product case
-// console.log('update non-existent product case\n');
-// inventory.update(1, {
+// const product = new Product({
+//   code: 0,
 //   name: 'p1',
 //   quantity: 1,
 //   cost: 1
 // });
-// console.log(inventory.getList);
-// console.log(inventory.getInvertedList);
+
+// console.log("list: " + inventory.getList);
+// console.log("ilist: " + inventory.getInvertedList);
+
+// // const product2 = new Product({
+// //   code: 10,
+// //   name: 'p2',
+// //   quantity: 2,
+// //   cost: 2
+// // });
+
+// // //no product case
+// // console.log('no product case\n');
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
+
+// // //one product case
+// // console.log('one product case\n');
+// // inventory.add(product1);
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
+// // console.log(inventory.search(0));
+
+// // //two products case
+// // console.log('two products case\n');
+// // inventory.add(product2);
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
+// // console.log(inventory.search(0));
+// // console.log(inventory.search(1));
+
+// // //Update product case
+// // console.log('Update product case\n');
+// // inventory.update(0, {
+// //   name: 'product1',
+// //   quantity: 1,
+// //   cost: 1
+// // });
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
+// // console.log(inventory.search(0));
+
+// // //delete product case
+// // console.log('delete product case\n');
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
+// // inventory.delete(0);
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
+// // console.log(inventory.search(0)); //now is non-existent
+// // console.log(inventory.search(1));
+
+// // //delete non-existent product case
+// // console.log('delete non-existent product case\n');
+// // inventory.delete(1);
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
+
+// // //Update non-existent product case
+// // console.log('update non-existent product case\n');
+// // inventory.update(1, {
+// //   name: 'p1',
+// //   quantity: 1,
+// //   cost: 1
+// // });
+// // console.log(inventory.getList);
+// // console.log(inventory.getInvertedList);
