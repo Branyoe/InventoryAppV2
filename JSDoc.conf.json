@@ -1,0 +1,22 @@
+{
+  "plugins": [],
+  "recurseDepth": 10,
+  "source": {
+    "include": ["InventoryApp_v2/models", "InventoryApp_v2/app.js"],
+    "exclude": ["InventoryApp_v2/.github", "InventoryApp_v2/.gitignore", "InventoryApp_v2/index.html", "InventoryApp_v2/styles.css", "InventoryApp_v2/JSDoc.conf.json"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": [
+      "jsdoc",
+      "closure"
+    ]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}
