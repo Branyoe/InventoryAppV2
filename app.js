@@ -7,7 +7,7 @@ import History from "./models/view/History.js";
 import HistoryItem from "./models/view/HistoryItem.js";
 import Inventory from "./models/logic/Inventory.js";
 import Product from "./models/logic/Product.js";
-import Utils from "./Utils.js";
+import Utils from "./models/Utils.js";
 
 
 // const toast = Utils.selector('liveToast');
