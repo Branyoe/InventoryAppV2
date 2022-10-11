@@ -1,4 +1,4 @@
-import Utils from "../../Utils.js";
+import Utils from "../Utils.js";
 
 /** Class representing a Inventory. */
 export default class Inventory {
