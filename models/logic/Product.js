@@ -21,8 +21,8 @@ export default class Product {
   }
 
   /**
-   * @method update
    * Update a product in all its properties except in "code"
+   * @method update
    * @param {object} {name, quantity, cost}
    */
   update({ name, quantity, cost }) {
