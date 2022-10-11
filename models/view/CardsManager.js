@@ -1,4 +1,5 @@
-import Utils from "../../Utils.js";
+import Utils from "../../Utils";
+
 
 export default class CardsManager {
   //********Propertys********
